@@ -31,14 +31,14 @@
                 <Button number="-" @click="print('-')"/>
             </div>
             <div class="keypad-actions">
-                <Button style="height:112px;" @click="print('=')">
+                <Button style="height:112px;" @click="print('*')">
                 <template v-slot:icon>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M53.3332 23.1733V10.6667H40.8265L31.9998 1.84L23.1732 10.6667H10.6665V23.1733L1.83984 32L10.6665 40.8267V53.3333H23.1732L31.9998 62.16L40.8265 53.3333H53.3332V40.8267L62.1598 32L53.3332 23.1733ZM31.9998 48C23.1732 48 15.9998 40.8267 15.9998 32C15.9998 23.1733 23.1732 16 31.9998 16C40.8265 16 47.9998 23.1733 47.9998 32C47.9998 40.8267 40.8265 48 31.9998 48ZM31.9998 21.3333C26.1065 21.3333 21.3332 26.1067 21.3332 32C21.3332 37.8933 26.1065 42.6667 31.9998 42.6667C37.8932 42.6667 42.6665 37.8933 42.6665 32C42.6665 26.1067 37.8932 21.3333 31.9998 21.3333Z" fill="#E5E5E5"/>
                     </svg>
                 </template>
                 </Button>
-                <Button style="height:112px;" @click="print('=')">
+                <Button style="height:112px" @click="print('<-')">
                 <template v-slot:icon>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M32 5.33331C17.2534 5.33331 5.33337 17.2533 5.33337 32C5.33337 46.7466 17.2534 58.6666 32 58.6666C46.7467 58.6666 58.6667 46.7466 58.6667 32C58.6667 17.2533 46.7467 5.33331 32 5.33331ZM45.3334 41.5733L41.5734 45.3333L32 35.76L22.4267 45.3333L18.6667 41.5733L28.24 32L18.6667 22.4266L22.4267 18.6666L32 28.24L41.5734 18.6666L45.3334 22.4266L35.76 32L45.3334 41.5733Z" fill="white"/>
@@ -110,6 +110,7 @@ a,link,li,ul,ol,p,strong,i,label,h1,h2,h3,h4,h5,h6{
     margin:0;
 }
 
+
 #app{
     height:100vh;
     display:flex;
@@ -125,7 +126,6 @@ a,link,li,ul,ol,p,strong,i,label,h1,h2,h3,h4,h5,h6{
 }
 
 .container{
-    width:840px;
     min-height:620px;
     background: rgba(35,35,35,1);
     overflow:hidden;
@@ -163,8 +163,8 @@ a,link,li,ul,ol,p,strong,i,label,h1,h2,h3,h4,h5,h6{
 .keypad{
     width:100%;
     display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content:center;
+    grid-template-columns: 2fr 1fr 1fr;
+    justify-content:space-between;
     padding-top:16px;
     align-content:center;
     align-items:center;
@@ -175,35 +175,91 @@ a,link,li,ul,ol,p,strong,i,label,h1,h2,h3,h4,h5,h6{
 .keypad-number{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:0px 60px;
 }
 
 .keypad-element{
     display:grid;
     grid-template-columns: repeat(1, 1fr);
-    margin:0 60px;
 }
 
 .keypad-actions{
     display:grid;
     grid-template-columns: repeat(1, 1fr);
-     gap:24px 0px;
 }
 
-.grid-start{
-    grid-column:1;
+// Served to screens that are at least 20em wide
+@media screen and (min-width: 20em) {
+    .container{
+        width:100%;
+        margin:0 16px;
+    }
+    .keypad{
+        justify-content:space-around;
+    }
+    .keypad-number{
+        width:100%;
+        gap:0px 8px;
+        &>button{
+            min-width:64px;
+        }
+    }
+    .keypad-element{
+        width:100%;
+        margin:0 8px;
+        &>button{
+            min-width:100%;
+        }
+    }
+    .keypad-actions{
+        width:100%;
+        gap:24px 0px;
+        &>button{
+            min-width:100%;
+        }
+    }
 }
 
-.grid-center{
-    grid-column:2;
+// Served to screens that are at least 64em wide
+@media screen and (min-width: 64em) {
+    .keypad-number{
+        gap:0px 60px;
+    }
+    .keypad-element{
+        margin:0 60px;
+    }
+    .keypad-actions{
+        gap:24px 0px;
+    }
 }
 
-.grid-end{
-    grid-column:3;
+// Served to screens that are at least 90em wide
+@media screen and (min-width: 90em) {
+    .keypad-number{
+        gap:0px 60px;
+    }
+    .keypad-element{
+        margin:0 60px;
+    }
+    .keypad-actions{
+        gap:24px 0px;
+    }
 }
 
-.keypad > *{
-    // width:100%;
+// Served to screens that are at least 120em wide
+@media screen and (min-width: 120em) {
+    .container{
+        width:840px;
+    }
+
+    .keypad-number{
+        gap:0px 60px;
+    }
+    .keypad-element{
+        margin:0 60px;
+    }
+    .keypad-actions{
+        gap:24px 0px;
+    }
 }
 
 </style>
